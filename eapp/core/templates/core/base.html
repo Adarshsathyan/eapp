@@ -50,9 +50,8 @@
                                    <ul>
                                        <li><a href="{% url 'login' %}">My Account </a></li>
                                        <li><a href="{% url 'wlist' %}">Wish List  </a></li>
-                                       <li><a href="cart.html">Shopping</a></li>
-                                       <li><a href="cart.html">Cart</a></li>
-                                       <li><a href="checkout.html">Checkout</a></li>
+                                       <li><a href="{% url 'cart' %}">Cart</a></li>
+                                       <li><a href="{% url 'checkout' %}">Checkout</a></li>
                                    </ul>
                                 </div>
                             </div>
@@ -74,7 +73,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{% url 'index' %}">Home</a></li>
-                                            <li><a href="Catagori.html">Catagories</a></li>
+                                            <li><a href="{% url 'catagory' %}">Catagories</a></li>
                                             <li><a href="login.html">My Account</a></li>
                                             <li><a href="cart.html">Cart</a></li>
                                             <li><a href="#">Pages</a>

@@ -10,3 +10,12 @@ def login(request):
 
 def wlist(request):
     return render(request,'core/product_list.html')
+
+def cart(request):
+    return render(request,'core/cart.html')
+
+def checkout(request):
+    return render(request,'core/checkout.html')
+
+def catagory(request):
+    return render(request,'core/catagori.html')
