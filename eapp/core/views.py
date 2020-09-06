@@ -7,3 +7,6 @@ def index(request):
 
 def login(request):
     return render(request,'core/login.html')
+
+def wlist(request):
+    return render(request,'core/product_list.html')
