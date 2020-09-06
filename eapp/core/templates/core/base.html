@@ -74,20 +74,19 @@
                                         <ul id="navigation">
                                             <li><a href="{% url 'index' %}">Home</a></li>
                                             <li><a href="{% url 'catagory' %}">Catagories</a></li>
-                                            <li><a href="login.html">My Account</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="{% url 'login' %}">My Account</a></li>
+                                            <li><a href="{% url 'cart' %}">Cart</a></li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
-                                                    <li><a href="login.html">Login</a></li>
-                                                    <li><a href="cart.html">Card</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="about.html">About</a></li>
-                                                    <li><a href="confirmation.html">Confirmation</a></li>
-                                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                                    <li><a href="checkout.html">Product Checkout</a></li>
+                                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                                    <li><a href="{% url 'cart' %}">Card</a></li>
+                                                    <li><a href="{% url 'about' %}">About</a></li>
+                                                    <li><a href="{% url 'confirmation' %}">Confirmation</a></li>
+                                                    <li><a href="{% url 'cart' %}">Shopping Cart</a></li>
+                                                    <li><a href="{% url 'checkout' %}">Product Checkout</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="{% url 'contact' %}">Contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -104,15 +103,15 @@
                                      </li>
                                     <li class=" d-none d-xl-block">
                                         <div class="favorit-items">
-                                            <i class="far fa-heart"></i>
+                                            <a href="{% url 'wlist' %}"><i class="far fa-heart"></i></a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="shopping-card">
-                                            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                            <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
                                         </div>
                                     </li>
-                                   <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">Sign in</a></li>
+                                   <li class="d-none d-lg-block"> <a href="{% url 'login' %}" class="btn header-btn">Sign in</a></li>
                                 </ul>
                             </div>
                             <!-- Mobile Menu -->

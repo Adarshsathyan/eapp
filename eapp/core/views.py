@@ -19,3 +19,12 @@ def checkout(request):
 
 def catagory(request):
     return render(request,'core/catagori.html')
+
+def about(request):
+    return render(request,'core/about.html')
+
+def confirmation(request):
+    return render(request,'core/confirmation.html')
+
+def contact(request):
+    return render(request,'core/contact.html')
