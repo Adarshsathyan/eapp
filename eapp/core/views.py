@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from .models import Products
 # Create your views here.
 def index(request):
-    return render(request,'core/index.html')
+    product = Products.objects.all()
+    return render(request,'core/index.html',{'product':product})
 
 def login(request):
     return render(request,'core/login.html')
