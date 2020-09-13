@@ -76,28 +76,26 @@
                             {% for p in product %}
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <div class="single-product mb-60">
-                                    <div class="product-img">
-                                        <img src="{{p.image.url}}" alt="">
+                                    <form action="" method="POST">
+
+                                        <div class="product-img">
+                                        <img src="{{p.imageURL }}" alt="">
                                         <div class="new-product">
                                             <span>New</span>
                                         </div>
                                     </div>
                                     <div class="product-caption">
-                                        <div class="product-ratting">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star low-star"></i>
-                                            <i class="far fa-star low-star"></i>
+                                        <h4><a >{{p.product_name}}</a></h4>
+                                        <div class="price text-center">
+                                            <p>
+                                                Rs.{{p.price}}/-
+                                            </p>
                                         </div>
-                                        <h4><a href="#">{{p.product_name}}</a></h4>
-                                        <div class="price">
-                                            <ul>
-                                                <li>{{p.price}}</li>
-                                                <li class="discount"></li>
-                                            </ul>
-                                        </div>
+                                        <button class="btn btn-header">Add to Cart</button>
                                     </div>
+                                        {% csrf_token %}
+                                    </form>
+
                                 </div>
                             </div>
                             {% endfor %}

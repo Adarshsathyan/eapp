@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Products
+from .models import Products,Cart
 # Create your views here.
 def index(request):
     product = Products.objects.all()
@@ -13,6 +13,7 @@ def wlist(request):
     return render(request,'core/product_list.html')
 
 def cart(request):
+
     return render(request,'core/cart.html')
 
 def checkout(request):
