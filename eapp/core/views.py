@@ -13,8 +13,9 @@ def wlist(request):
     return render(request,'core/product_list.html')
 
 def cart(request):
-
-    return render(request,'core/cart.html')
+    items = Cart.objects.all()
+    product = Products.objects.all()
+    return render(request,'core/cart.html',{'items':items,'product':product})
 
 def checkout(request):
     return render(request,'core/checkout.html')
