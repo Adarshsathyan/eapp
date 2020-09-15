@@ -48,7 +48,7 @@
                   </div>
                 </td>
                 <td>
-                  <h5>{{ item.Product.price}}</h5>
+                  <h5>{{ item.product.price}}</h5>
                 </td>
                 <td>
                   <div class="product_count">
@@ -58,18 +58,32 @@
                   </div>
                 </td>
                 <td>
-                  <h5>$720.00</h5>
+                  <h5>{{ item.get_total }}</h5>
                 </td>
               </tr>
             {% endfor %}
+
               <tr class="bottom_button">
                 <td>
                   <a class="btn_1" href="#">Update Cart</a>
                 </td>
                 <td></td>
                 <td></td>
-                <td><a class="btn_1 checkout_btn_1" href="#">Checkout</a></td>
+                <td>Quantity: {{order.get_cart_items}}</td>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Sub total:  ₹{{order.get_cart_total}}/-</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><a class="btn_1 checkout_btn_1" href="#">Checkout</a></td>
+            </tr>
               </tr>
+
             </tbody>
           </table>
         </div>
