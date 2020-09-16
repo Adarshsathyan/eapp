@@ -48,6 +48,12 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         return total
 
+    @property
+    def tot(self):
+        orderitems = self.cart_set.all()
+        total = sum([item.get_total for item in orderitems])
+        t = int(total+50)
+        return t
 
 
 class Cart(models.Model):
@@ -61,6 +67,8 @@ class Cart(models.Model):
         total = self.quantity * self.product.price
         return total
 
+
+
     def __str__(self):
         return str(self.id)
     
@@ -69,9 +77,10 @@ class Checkout(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
-    city = models.CharField(max_length=200, null=False)
+    district = models.CharField(max_length=200, null=False)
     state = models.CharField(max_length=200, null=False)
     zipcode = models.CharField(max_length=200, null=False)
+    phonenumber = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
