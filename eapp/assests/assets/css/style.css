@@ -11560,13 +11560,21 @@ input:focus {
   width: 50px;
   text-align: right;
   display: inline-block;
-  margin-left: 30px;
+  margin-left: 51px;
+  color: #415094;
+}
+.qu-center {
+  float: none;
+  width: 50px;
+  text-align: right;
+  display: inline-block;
+  margin-left: 78px;
   color: #415094;
 }
 
 /* line 1696, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
 .order_box .list li:nth-child(4) a .middle {
-  margin-left: 48px;
+  margin-left: 75px;
 }
 
 /* line 1706, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
@@ -13024,6 +13032,10 @@ input:focus {
   .breadcrumb_part .breadcrumb_iner h2 {
     font-size: 30px;
   }
+}
+.si{
+    width: 50px;
+    height:50px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -22,6 +22,26 @@
             <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
             <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
             <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+
+            function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken');
+        </script>
    </head>
 
    <body>
@@ -75,7 +95,7 @@
                                             <li><a href="{% url 'index' %}">Home</a></li>
                                             <li><a href="{% url 'catagory' %}">Catagories</a></li>
                                             <li><a href="{% url 'login' %}">My Account</a></li>
-                                            <li><a href="{% url 'cart' %}">Cart</a></li>
+                                            <li><a href="{% url 'cart' %}">Cart<sup class="text-danger font-weight-bold h6">{{cartItem}}</sup></a></li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
                                                     <li><a href="{% url 'login' %}">Login</a></li>
@@ -91,7 +111,7 @@
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+                            <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fx-card">
                                 <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                     <li class="d-none d-xl-block">
                                         <div class="form-box f-right ">
@@ -101,16 +121,6 @@
                                             </div>
                                         </div>
                                      </li>
-                                    <li class=" d-none d-xl-block">
-                                        <div class="favorit-items">
-                                            <a href="{% url 'wlist' %}"><i class="far fa-heart"></i></a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-card">
-                                            <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
-                                        </div>
-                                    </li>
                                    <li class="d-none d-lg-block"> <a href="{% url 'login' %}" class="btn header-btn">Sign in</a></li>
                                 </ul>
                             </div>

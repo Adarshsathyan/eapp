@@ -10,5 +10,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('confirmation/', views.confirmation, name='confirmation'),
     path('contact/', views.contact, name='contact'),
+    path('updateitem/',views.UpdateItem,name='updateitem'),
 
 ]

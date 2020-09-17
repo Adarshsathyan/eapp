@@ -76,8 +76,6 @@
                             {% for p in product %}
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <div class="single-product mb-60">
-                                    <form action="" method="POST">
-
                                         <div class="product-img">
                                         <img src="{{p.imageURL }}" alt="">
                                         <div class="new-product">
@@ -91,11 +89,8 @@
                                                 Rs.{{p.price}}/-
                                             </p>
                                         </div>
-                                        <button class="btn btn-header">Add to Cart</button>
+                                        <button data-product ={{p.id}} data-action ="add" class="btn btn-header update-cart ">Add to Cart</button>
                                     </div>
-                                        {% csrf_token %}
-                                    </form>
-
                                 </div>
                             </div>
                             {% endfor %}
