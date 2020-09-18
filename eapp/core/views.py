@@ -129,6 +129,7 @@ def UpdateItem(request):
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     orderItem, created = Cart.objects.get_or_create(order=order, product=product)
 
+
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':

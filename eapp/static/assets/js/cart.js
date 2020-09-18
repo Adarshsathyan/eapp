@@ -19,7 +19,7 @@ for(var i = 0 ; i < updateBtns.length; i++){
 
 }
 function updateUserOrder(productId,action){
-    console.log('user is logged and seding date....')
+    console.log("sucs")
     var url = '/updateitem/'
 
     fetch(url,{
@@ -36,6 +36,6 @@ function updateUserOrder(productId,action){
     })
     .then((data)=>{
         console.log('data:',data)
-        location.reload()
+        window.alert("added")
     })
 }
