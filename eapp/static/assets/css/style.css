@@ -13039,3 +13039,16 @@ input:focus {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+.qu-adj{
+
+width: 44px;
+    display: inline-block;
+    background: red;
+    float: left;
+    margin-left: 23px;
+}

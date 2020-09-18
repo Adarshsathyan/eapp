@@ -49,12 +49,16 @@
                 </td>
                 <td>
                   <h5>₹{{ item.product.price}}</h5>
+
                 </td>
                 <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                    <input class="input-number" type="text" value="{{item.quantity}}" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                  <div class="row ">
+                    <div class=" row quantity col-md-6" style="width:20px; display:inline-block;">{{item.quantity}}</div>
+                    <div class="  quantity col-md-6 qu-adj ">
+                      <img data-product="{{item.product.id}}" data-action="add" style="width:20px;" class="chg-quantity update-cart" src="{% static  'assets/img/arrow-up.png' %}">
+
+                      <img data-product="{{item.product.id}}" data-action="remove" style="width:20px; " class="chg-quantity update-cart" src="{% static  'assets/img/arrow-down.png' %}">
+                    </div>
                   </div>
                 </td>
                 <td>
