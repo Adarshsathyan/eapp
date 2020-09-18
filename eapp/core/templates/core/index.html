@@ -89,7 +89,11 @@
                                                 Rs.{{p.price}}/-
                                             </p>
                                         </div>
+                                        {% if productId %}
+                                        <button data-product ={{p.id}} data-action ="add" class="btn btn-header update-cart ">Go to cart</button>
+                                        {% else %}
                                         <button data-product ={{p.id}} data-action ="add" class="btn btn-header update-cart ">Add to cart</button>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

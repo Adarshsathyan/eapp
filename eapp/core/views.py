@@ -10,11 +10,13 @@ def index(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
+
     else:
         items = []
         order ={'get_cart_total':0 , 'get_cart_items':0}
         cartItem = order['get_cart_items']
     product = Products.objects.all()
+
     return render(request,'core/index.html',{'product':product, 'items': items ,'cartItem': cartItem})
 
 def login(request):
