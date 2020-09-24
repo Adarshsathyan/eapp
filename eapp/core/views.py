@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 import json
+from .forms import shippingForm, SearchForm
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -10,14 +11,19 @@ def index(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
-
     else:
         items = []
-        order ={'get_cart_total':0 , 'get_cart_items':0}
+        order ={'get_cart_total':0 , 'get_cart_items':0 ,'shipping':True}
         cartItem = order['get_cart_items']
-    product = Products.objects.all()
+    form = SearchForm(request.POST or None)
+    if request.method == 'POST':
+        products = Products.objects.all().filter(product_name__icontains =form['product_name'].value())
+        product = products
+        form = form
+    else:
+        product = Products.objects.all()
 
-    return render(request,'core/index.html',{'product':product, 'items': items ,'cartItem': cartItem})
+    return render(request,'core/index.html',{'product':product, 'items': items ,'cartItem': cartItem,'form':form})
 
 def login(request):
     if request.user.is_authenticated:
@@ -49,17 +55,28 @@ def cart(request):
     return render(request,'core/cart.html',{'items':items,'order':order,'cartItem': cartItem})
 
 def checkout(request):
+    form = shippingForm
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
+        if request.method == 'post':
+            form = shippingForm(request.POST)
+            if form.is_valid():
+                post = form.save()
+                post.save()
+                return redirect('cart')
+        else:
+            form = shippingForm()
     else:
 
         items = []
         order = {' get_cart_total': 0, 'get_cart_items': 0}
         cartItem = order['get_cart_items']
-    context = {'items':items,'order':order,'cartItem': cartItem}
+
+
+    context = {'items':items,'order':order,'cartItem': cartItem,'form':form}
     return render(request,'core/checkout.html',context)
 
 def catagory(request):
@@ -140,4 +157,18 @@ def UpdateItem(request):
 
     if orderItem.quantity <= 0:
         orderItem.delete()
+
+
     return JsonResponse('item was added', safe=False)
+
+def search(request,word):
+    products =  Products.objects.all()
+    for product in products:
+        if product == word:
+            item = product
+        else:
+            item =  Products.objects.all()
+
+    context = {'item':item}
+
+    return render(request,'core/index.html',context)

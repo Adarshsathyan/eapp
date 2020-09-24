@@ -36,9 +36,13 @@ function updateUserOrder(productId,action){
     })
     .then((data)=>{
         console.log('data:',data)
-        window.alert("Item added to cart")
+        window.alert("Item Added to cart")
         location.reload()
-        add = "Go to cart"
-        return add
+
         })
+}
+function addin(){
+
+    var add = document.getElementById('a')
+    add.style.display="none";
 }

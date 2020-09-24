@@ -56,7 +56,6 @@
                     <div class=" row quantity col-md-6" style="width:20px; display:inline-block;">{{item.quantity}}</div>
                     <div class="  quantity col-md-6 qu-adj ">
                       <img data-product="{{item.product.id}}" data-action="add" style="width:20px;" class="chg-quantity update-cart" src="{% static  'assets/img/arrow-up.png' %}">
-
                       <img data-product="{{item.product.id}}" data-action="remove" style="width:20px; " class="chg-quantity update-cart" src="{% static  'assets/img/arrow-down.png' %}">
                     </div>
                   </div>
@@ -69,7 +68,7 @@
 
               <tr class="bottom_button">
                 <td>
-                  <a class="btn_1" href="#">Update Cart</a>
+                  <a class="btn_1" href="{% url 'index' %}">Back to Shop</a>
                 </td>
                 <td></td>
                 <td></td>
@@ -84,7 +83,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><a class="btn_1 checkout_btn_1" href="#">Checkout</a></td>
+              <td><a class="btn_1 checkout_btn_1" href="{% url 'checkout' %}">Checkout</a></td>
             </tr>
               </tr>
 

@@ -1,7 +1,12 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
      {% block content %}
+<style>
+  .hid{
+  style="display:none;
+  }
+</style>
 
   <!-- slider Area Start-->
   <div class="slider-area ">
@@ -27,33 +32,32 @@
         <div class="row">
           <div class="col-lg-8">
             <h3>Billing Details</h3>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+            <form class="row " action="" method="post" id="form">
+
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
-                <span class="placeholder" data-placeholder="Full name"></span>
+                {{form.name|as_crispy_field}}
               </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="number" name="number" />
-                <span class="placeholder" data-placeholder="Phone number"></span>
+              <div class="col-md-6 ">
+                {{form.phonenumber|as_crispy_field}}
               </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="email" name="compemailany" />
-                <span class="placeholder" data-placeholder="Email Address"></span>
+              <div class="col-md-6 ">
+                {{form.email|as_crispy_field}}
               </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
-                <span class="placeholder" data-placeholder="Address line "></span>
+              <div class="col-md-12 ">
+                {{form.address|as_crispy_field}}
               </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="city" name="city" />
-                <span class="placeholder" data-placeholder="State"></span>
+              <div class="col-md-12 ">
+                {{form.state|as_crispy_field}}
               </div>
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="district" name="district" />
-                <span class="placeholder" data-placeholder="District"></span>
+              <div class="col-md-12 ">
+                {{form.district|as_crispy_field}}
               </div>
-              <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
+              <div class="col-md-12 ">
+                {{form.zipcode|as_crispy_field}}
+              </div>
+                  {% csrf_token %}
+               <div class="col-md-12 form-group">
+                 <button  class=" form-control btn btn-secondary " id="sub-btn"  >Submit</button>
               </div>
             </form>
           </div>
@@ -92,35 +96,12 @@
                   </a>
                 </li>
               </ul>
-              <div class="payment_item">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option5" name="selector" />
-                  <label for="f-option5">Check payments</label>
-                  <div class="check"></div>
-                </div>
-                <p>
-                  Please send a check to Store Name, Store Street, Store Town,
-                  Store State / County, Store Postcode.
-                </p>
-              </div>
-              <div class="payment_item active">
-                <div class="radion_btn">
-                  <input type="radio" id="f-option6" name="selector" />
-                  <label for="f-option6">Paypal </label>
-                  <img src="{% static 'img/product/single-product/card.jpg' %}" alt="" />
-                  <div class="check"></div>
-                </div>
-                <p>
-                  Please send a check to Store Name, Store Street, Store Town,
-                  Store State / County, Store Postcode.
-                </p>
-              </div>
-              <div class="creat_account">
+              <div class="creat_account" id ="shiped">
                 <input type="checkbox" id="f-option4" name="selector" />
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#">terms & conditions*</a>
               </div>
-              <a class="btn_3" href="#">Proceed to Paypal</a>
+              <a class="btn_3 " id="cls" href="{% url 'confirmation' %}"style="display:none;">Proceed to Paypal</a>
             </div>
           </div>
         </div>
@@ -128,6 +109,18 @@
     </div>
   </section>
   <!--================End Checkout Area =================-->
+<script type="text/javascript">
 
+  var form = document.getElementById('form')
+
+  form.addEventListener('submit',function(e){
+
+    e.preventDefault()
+    console.log('Form submitted')
+    document.getElementById('sub-btn').style.display="none";
+    document.getElementById('cls').style.display="block";
+
+  })
+</script>
 
   {% endblock %}

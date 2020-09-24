@@ -13052,3 +13052,6 @@ width: 44px;
     float: left;
     margin-left: 23px;
 }
+.hid{
+	display: none;
+}

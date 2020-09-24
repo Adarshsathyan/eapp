@@ -13,7 +13,7 @@ class Customer(models.Model):
 # Create your models here.
 class Products(models.Model):
     image = models.ImageField(upload_to='static/assets/img', blank=True, null= True)
-    product_name= models.CharField(max_length=200)
+    product_name= models.CharField(max_length=200,blank=True)
     digital = models.BooleanField(default=False,null=True,blank=True)
     price = models.FloatField()
 
@@ -36,6 +36,16 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.cart_set.all()
+        for i in orderitems:
+            if i.order.complete == False:
+                shipping = True
+        return shipping
+
     @property
     def get_cart_total(self):
         orderitems = self.cart_set.all()
@@ -67,21 +77,22 @@ class Cart(models.Model):
         total = self.quantity * self.product.price
         return total
 
-
-
     def __str__(self):
         return str(self.id)
     
 
 class Checkout(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,null=True)
+    name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200,null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=200, null=False)
-    district = models.CharField(max_length=200, null=False)
-    state = models.CharField(max_length=200, null=False)
-    zipcode = models.CharField(max_length=200, null=False)
-    phonenumber = models.CharField(max_length=200, null=False)
+    address = models.CharField(max_length=200, null=True)
+    district = models.CharField(max_length=200, null=True)
+    state = models.CharField(max_length=200, null=True)
+    zipcode = models.CharField(max_length=200, null=True)
+    phonenumber = models.CharField(max_length=200, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
 	    return self.address
+

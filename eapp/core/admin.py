@@ -22,5 +22,6 @@ admin.site.register(Order,OrderAdmin)
 
 class CheckoutAdmin(admin.ModelAdmin):
 
-    list_display = ('customer','address','district','state','zipcode')
+    list_display = ('customer','name','phonenumber','address','district','state','zipcode')
 admin.site.register(Checkout,CheckoutAdmin)
+
