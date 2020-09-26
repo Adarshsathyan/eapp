@@ -2,11 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
      {% block content %}
-<style>
-  .hid{
-  style="display:none;
-  }
-</style>
 
   <!-- slider Area Start-->
   <div class="slider-area ">
@@ -32,33 +27,34 @@
         <div class="row">
           <div class="col-lg-8">
             <h3>Billing Details</h3>
-            <form class="row " action="" method="post" id="form">
+              <form class="row " id = "form" action="" method="post" novalidate="novalidate">
+                <div id="info">
+                  <div class="col-md-12  form-group ">
+                <input type="text" class="form-control  " id="first" name="name" placeholder="Full Name"/>
+              </div>
+                <div class="col-md-12 form-group ">
+                <input type="text" class="form-control " id="email" name="email" placeholder="E-mail" />
+              </div>
+                </div>
 
-              <div class="col-md-12 form-group p_star">
-                {{form.name|as_crispy_field}}
+              <div class="col-md-12 form-group ">
+                <input type="text" class="form-control" id="number" name="phnumber" placeholder="Phonenumber"/>
               </div>
-              <div class="col-md-6 ">
-                {{form.phonenumber|as_crispy_field}}
+
+              <div class="col-md-12 form-group ">
+                <input type="text" class="form-control" id="add1" name="address" placeholder="Address"/>
               </div>
-              <div class="col-md-6 ">
-                {{form.email|as_crispy_field}}
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="state" name="state" placeholder="State"/>
               </div>
-              <div class="col-md-12 ">
-                {{form.address|as_crispy_field}}
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="district" name="district" placeholder="District" />
               </div>
-              <div class="col-md-12 ">
-                {{form.state|as_crispy_field}}
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
               </div>
-              <div class="col-md-12 ">
-                {{form.district|as_crispy_field}}
-              </div>
-              <div class="col-md-12 ">
-                {{form.zipcode|as_crispy_field}}
-              </div>
-                  {% csrf_token %}
-               <div class="col-md-12 form-group">
-                 <button  class=" form-control btn btn-secondary " id="sub-btn"  >Submit</button>
-              </div>
+                <button class="btn btn-primary form-control " id ="sub-btn">Submit</button>
+                {% csrf_token %}
             </form>
           </div>
           <div class="col-lg-4">
@@ -101,7 +97,8 @@
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#">terms & conditions*</a>
               </div>
-              <a class="btn_3 " id="cls" href="{% url 'confirmation' %}"style="display:none;">Proceed to Paypal</a>
+              <a class="btn_3 " id="cls" href="" style="display:none;">Proceed to Paypal</a>
+
             </div>
           </div>
         </div>
@@ -110,6 +107,12 @@
   </section>
   <!--================End Checkout Area =================-->
 <script type="text/javascript">
+  var total = '{{order.get_cart_total}}'
+
+  if(user != 'AnonymousUser'){
+      console.log("hello")
+      document.getElementById('info').style.display = "none";
+ }
 
   var form = document.getElementById('form')
 
@@ -121,6 +124,53 @@
     document.getElementById('cls').style.display="block";
 
   })
+  document.getElementById('cls').addEventListener('click',function(e){
+      submitFormData()
+  })
+  function submitFormData(){
+       console.log("Payment bttn clicked")
+       var userFormData={
+          'name':null,
+          'email':null,
+          'total':total,
+       }
+       var shippingInfo ={
+          'phnumber':null,
+          'address':null,
+          'state':null,
+          'district':null,
+          'zip':null,
+       }
+        shippingInfo.phnumber = form.phnumber.value
+        shippingInfo.address = form.address.value
+        shippingInfo.state = form.state.value
+        shippingInfo.district = form.district.value
+        shippingInfo.zip = form.zip.value
+
+        if(user =='AnonymousUser'){
+        userFormDate.name = form.name.value
+        userFormDate.email = form.email.value
+
+        }
+        var url = '/process_order/'
+        fetch(url,{
+          method:'POST',
+          headers:{
+              'Content-Type':'applictaion/json',
+              'X-CSRFToken':csrftoken,
+          },
+          body:JSON.stringify({'form':userFormData,'shipping':shippingInfo})
+
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Sucess:', data);
+          alert('Transaction Completed');
+          window.location.href = "{% url 'confirmation' %}"
+
+        })
+
+  }
 </script>
 
   {% endblock %}

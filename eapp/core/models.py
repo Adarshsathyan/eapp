@@ -83,8 +83,6 @@ class Cart(models.Model):
 
 class Checkout(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,null=True)
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200,null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=True)
     district = models.CharField(max_length=200, null=True)

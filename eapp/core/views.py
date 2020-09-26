@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 import json
-from .forms import shippingForm, SearchForm
+from .forms import SearchForm
+import datetime
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -55,20 +56,13 @@ def cart(request):
     return render(request,'core/cart.html',{'items':items,'order':order,'cartItem': cartItem})
 
 def checkout(request):
-    form = shippingForm
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
-        if request.method == 'post':
-            form = shippingForm(request.POST)
-            if form.is_valid():
-                post = form.save()
-                post.save()
-                return redirect('cart')
-        else:
-            form = shippingForm()
+
+
     else:
 
         items = []
@@ -76,7 +70,7 @@ def checkout(request):
         cartItem = order['get_cart_items']
 
 
-    context = {'items':items,'order':order,'cartItem': cartItem,'form':form}
+    context = {'items':items,'order':order,'cartItem': cartItem}
     return render(request,'core/checkout.html',context)
 
 def catagory(request):
@@ -161,14 +155,30 @@ def UpdateItem(request):
 
     return JsonResponse('item was added', safe=False)
 
-def search(request,word):
-    products =  Products.objects.all()
-    for product in products:
-        if product == word:
-            item = product
-        else:
-            item =  Products.objects.all()
+def processOrder(request):
 
-    context = {'item':item}
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
 
-    return render(request,'core/index.html',context)
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+        Checkout.objects.create(
+        customer=customer,
+        order=order,
+        address = data['shipping']['address'],
+        phonenumber = data['shipping']['phnumber'],
+        district = data['shipping']['district'],
+        state = data['shipping']['state'],
+        zipcode = data['shipping']['zip'],
+        )
+
+    else:
+        print("user not logge in")
+    return JsonResponse('payment completed', safe=False)
+
