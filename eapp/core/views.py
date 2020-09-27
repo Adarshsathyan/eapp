@@ -107,6 +107,7 @@ def confirmation(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
+
     else:
 
         items = []
@@ -121,6 +122,7 @@ def contact(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
+
     else:
 
         items = []

@@ -101,40 +101,21 @@
                                                     <li><a href="{% url 'login' %}">Login</a></li>
                                                     <li><a href="{% url 'cart' %}">Card</a></li>
                                                     <li><a href="{% url 'about' %}">About</a></li>
-                                                    <li><a href="{% url 'confirmation' %}">Confirmation</a></li>
+                                                    <li><a href="{% url 'confirmation'  %}">Confirmation</a></li>
                                                     <li><a href="{% url 'cart' %}">Shopping Cart</a></li>
                                                     <li><a href="{% url 'checkout' %}">Product Checkout</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="{% url 'contact' %}">Contact</a></li>
+                                            {% if request.user.is_authenticated %}
+                                            {% else %}
+                                                <li><a href="{% url 'login' %}"><button  class="btn header-btn">Sign in</button></a></li>
+                                            {% endif %}
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fx-card">
-                                <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                    <li class="d-none d-xl-block">
-                                        <div class="form-box row col-md-12 ">
-<!--                                            <form method="POST" action="">-->
-<!--                                                <div class="col-md-12">-->
-<!--                                                    {% csrf_token %}-->
-<!--                                                {{form|crispy}}-->
-<!--                                                </div>-->
-<!--                                                <div class="col-md-12 f-right">-->
-<!--                                                 <button class="btn">search</button>-->
-<!--                                                </div>-->
 
-<!--                                            </form>-->
-
-                                        </div>
-                                     </li>
-                                    {% if request.user.is_authenticated %}
-
-                                    {% else %}
-                                   <li class="d-none d-lg-block"> <a href="{% url 'login' %}" class="btn header-btn">Sign in</a></li>
-                                    {% endif %}
-                                </ul>
-                            </div>
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
