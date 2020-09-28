@@ -32,11 +32,13 @@ def login(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
         cartItem = order.get_cart_items
+
     else:
         items = []
         order ={'get_cart_total':0 , 'get_cart_items':0}
         cartItem = order['get_cart_items']
-    return render(request,'core/login.html',{'items': items ,'cartItem': cartItem})
+    return render(request, 'core/login.html', {'items': items, 'cartItem': cartItem})
+
 
 def wlist(request):
     return render(request,'core/product_list.html')
