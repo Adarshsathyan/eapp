@@ -1,9 +1,9 @@
 from django import forms
-from .models import Checkout, Products
+from .models import Contact
 
 
 
-class SearchForm(forms.ModelForm):
+class ContactForm(forms.ModelForm):
     class Meta:
-        model = Products
-        fields = ['product_name']
+        model = Contact
+        fields = '__all__'

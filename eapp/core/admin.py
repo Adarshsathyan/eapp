@@ -25,3 +25,8 @@ class CheckoutAdmin(admin.ModelAdmin):
     list_display = ('customer','phonenumber','address','district','state','zipcode')
 admin.site.register(Checkout,CheckoutAdmin)
 
+class ContactAdmin(admin.ModelAdmin):
+
+    list_display = ('message','name','email','subject')
+admin.site.register(Contact,ContactAdmin)
+

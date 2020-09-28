@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 import json
-from .forms import SearchForm
+from .forms import ContactForm
 import datetime
 # Create your views here.
 def index(request):
+    product = Products.objects.all()
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -16,15 +17,8 @@ def index(request):
         items = []
         order ={'get_cart_total':0 , 'get_cart_items':0 ,'shipping':True}
         cartItem = order['get_cart_items']
-    form = SearchForm(request.POST or None)
-    if request.method == 'POST':
-        products = Products.objects.all().filter(product_name__icontains =form['product_name'].value())
-        product = products
-        form = form
-    else:
-        product = Products.objects.all()
 
-    return render(request,'core/index.html',{'product':product, 'items': items ,'cartItem': cartItem,'form':form})
+    return render(request,'core/index.html',{'product':product, 'items': items ,'cartItem': cartItem})
 
 def login(request):
     if request.user.is_authenticated:
@@ -130,7 +124,8 @@ def contact(request):
         items = []
         order = {' get_cart_total': 0, 'get_cart_items': 0}
         cartItem = order['get_cart_items']
-    context = {'items':items,'order':order,'cartItem': cartItem}
+    form = ContactForm()
+    context = {'items':items,'order':order,'cartItem': cartItem,'form':form}
     return render(request,'core/contact.html',context)
 
 def UpdateItem(request):
@@ -185,4 +180,10 @@ def processOrder(request):
     else:
         print("user not logge in")
     return JsonResponse('payment completed', safe=False)
-
+def connect(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            post.save()
+            return redirect('index')
