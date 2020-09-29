@@ -31,7 +31,7 @@ def login(request):
         items = []
         order ={'get_cart_total':0 , 'get_cart_items':0}
         cartItem = order['get_cart_items']
-    return render(request, 'core/login.html', {'items': items, 'cartItem': cartItem})
+    return render(request, 'registration/login.html', {'items': items, 'cartItem': cartItem})
 
 
 def wlist(request):
