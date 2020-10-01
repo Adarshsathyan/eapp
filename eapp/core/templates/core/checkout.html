@@ -27,7 +27,8 @@
         <div class="row">
           <div class="col-lg-8">
             <h3>Billing Details</h3>
-              <form class="row " id = "form" action="" method="post" novalidate="novalidate">
+            {% if request.user.is_authenticated %}
+              <form class="row " id = "form" action="" method="post">
                 <div id="info">
                   <div class="col-md-12  form-group ">
                 <input type="text" class="form-control  " id="first" name="name" placeholder="Full Name"/>
@@ -56,6 +57,10 @@
                 <button class="btn btn-primary form-control " id ="sub-btn">Submit</button>
                 {% csrf_token %}
             </form>
+            {% else %}
+            <p>You have to Sign in First</p>
+              <a href="{% url 'login' %}"><button  class="btn btn-info">Sign in</button></a>
+            {% endif %}
           </div>
           <div class="col-lg-4">
             <div class="order_box">
@@ -92,13 +97,10 @@
                   </a>
                 </li>
               </ul>
-              <div class="creat_account" id ="shiped">
-                <input type="checkbox" id="f-option4" name="selector" />
-                <label for="f-option4">I’ve read and accept the </label>
-                <a href="#">terms & conditions*</a>
-              </div>
+              {% if request.user.is_authenticated %}
               <a class="btn_3 " id="cls" href="" style="display:none;">Proceed to Paypal</a>
-
+              {% else %}
+              {% endif %}
             </div>
           </div>
         </div>

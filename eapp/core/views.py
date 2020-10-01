@@ -1,9 +1,10 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 import json
-from .forms import ContactForm
+from .forms import ContactForm, CustomReg
 import datetime
 # Create your views here.
 def index(request):
@@ -187,3 +188,12 @@ def connect(request):
             post = form.save()
             post.save()
             return redirect('index')
+
+def register(request):
+    form = CustomReg()
+    if request.method == 'POST':
+        form = CustomReg(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    return render(request,'registration/register.html', {'form':form})

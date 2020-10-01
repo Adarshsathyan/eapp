@@ -5,60 +5,12 @@
     <!-- Preloader Start -->
     <main>
         <!-- slider Area Start -->
-        <div class="slider-area ">
-            <!-- Mobile Menu -->
-            <div class="slider-active">
-                <div class="single-slider slider-height" data-background="{% static 'assets/img/hero/h1_hero.jpg' %}">
-                    <div class="container">
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
-                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                    <img src="{% static 'assets/img/hero/hero_man.png' %}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
-                                <div class="hero__caption">
-                                    <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
-                                    <h1 data-animation="fadeInRight" data-delay=".6s">Winter <br> Collection</h1>
-                                    <p data-animation="fadeInRight" data-delay=".8s">Best Cloth Collection By 2020!</p>
-                                    <!-- Hero-btn -->
-                                    <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                        <a href="industries.html" class="btn hero-btn">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-slider slider-height" data-background="{% static 'assets/img/hero/h1_hero.jpg' %}">
-                    <div class="container">
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
-                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                    <img src="{% static 'assets/img/hero/hero_man.png' %}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
-                                <div class="hero__caption">
-                                    <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
-                                    <h1 data-animation="fadeInRight" data-delay=".6s">Winter <br> Collection</h1>
-                                    <p data-animation="fadeInRight" data-delay=".8s">Best Cloth Collection By 2020!</p>
-                                    <!-- Hero-btn -->
-                                    <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                        <a href="industries.html" class="btn hero-btn">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- slider Area End-->
         <!-- Category Area Start-->
         <!-- Category Area End-->
         <!-- Latest Products Start -->
-        <section class="latest-product-area padding-bottom">
+        <section class="latest-product-area padding-bottom" id="sho">
             <div class="container">
                 <div class=" product-btn d-flex justify-content-end align-items-end">
                     <!-- Section Tittle -->
@@ -89,8 +41,11 @@
                                                 Rs.{{p.price}}/-
                                             </p>
                                         </div>
+                                        {% if request.user.is_authenticated %}
                                         <button data-product ={{p.id}} id ="a" data-action ="add" class="btn btn-header update-cart">Add to cart</button>
-                                        <button  id ="b"  class="btn btn-header" style="display:none;">Go to cart</button>
+                                        {% else %}
+                                        <p>Please <a href="{% url 'login' %}" class="text-info">SignIn</a> to Add to Cart</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -104,33 +59,6 @@
         </section>
         <!-- Latest Products End -->
         <!-- Best Product Start -->
-        <div class="best-product-area lf-padding" >
-           <div class="product-wrapper bg-height" style="background-image: url('assets/img/categori/card.png')">
-                <div class="container position-relative">
-                    <div class="row justify-content-between align-items-end">
-                        <div class="product-man position-absolute  d-none d-lg-block">
-                            <img src="{% static 'assets/img/categori/card-man.png' %}" alt="">
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 d-none d-lg-block">
-                            <div class="vertical-text">
-                                <span>Manz</span>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8">
-                            <div class="best-product-caption">
-                                <h2>Find The Best Product<br> from Our Shop</h2>
-                                <p>Designers who are interesten creating state ofthe.</p>
-                                <a href="#" class="black-btn">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-           </div>
-           <!-- Shape -->
-           <div class="shape bounce-animate d-none d-md-block">
-               <img src="{% static 'assets/img/categori/card-shape.png' %}" alt="">
-           </div>
-        </div>
         <!-- Best Product End-->
         <!-- Best Collection Start -->
 <!--        <div class="best-collection-area section-padding2">-->
@@ -203,7 +131,7 @@
                         </div>
                          <div class="col-xl-5 col-lg-5 col-md-6 ">
                             <div class="latest-subscribe">
-                                <form action="#">
+                                <form action="#sho" >
                                     <input type="email" placeholder="Your email here">
                                     <button>Shop Now</button>
                                 </form>

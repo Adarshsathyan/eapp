@@ -34,6 +34,7 @@
                     <div class="login_part_text text-center">
                         <div class="login_part_text_iner">
                             <h2>How was the shopping?</h2>
+                            <p></p>
                             <p>Hope you have enjoyed the shopping. More exciting offers are waiting for you..
                             switch Back to Shop And Shop Your favorites..</p>
                             <a href="{% url 'logout' %}" class="btn_3">Logout</a>
@@ -45,9 +46,9 @@
                     <div class="login_part_text text-center">
                         <div class="login_part_text_iner">
                             <h2>New to our Shop?</h2>
-                            <p>There are advances being made in science and technology
-                                everyday, and a good example of this is the</p>
-                            <a href="#" class="btn_3">Create an Account</a>
+                            <p>There are advances being made in our Estore and technology
+                                everyday.</p>
+                            <a href="{% url 'register' %}" class="btn_3">Create an Account</a>
                         </div>
 
                     </div>
@@ -69,14 +70,9 @@
                                     {{form.password|as_crispy_field}}
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <div class="creat_account d-flex align-items-center">
-                                        <input type="checkbox" id="f-option" name="selector">
-                                        <label for="f-option">Remember me</label>
-                                    </div>
                                     <button type="submit" value="submit" class="btn_3">
                                         log in
                                     </button>
-                                    <a class="lost_pass" href="#">forget password?</a>
                                 </div>
                             </form>
                         </div>
