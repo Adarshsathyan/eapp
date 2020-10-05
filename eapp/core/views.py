@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -10,6 +11,7 @@ import datetime
 def index(request):
     product = Products.objects.all()
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -23,6 +25,7 @@ def index(request):
 
 def login(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -38,9 +41,11 @@ def login(request):
 def wlist(request):
     return render(request,'core/product_list.html')
 
+@login_required
 def cart(request):
 
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -54,6 +59,7 @@ def cart(request):
 
 def checkout(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -72,6 +78,7 @@ def checkout(request):
 
 def catagory(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -86,6 +93,7 @@ def catagory(request):
 
 def about(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -100,6 +108,7 @@ def about(request):
 
 def confirmation(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -115,6 +124,7 @@ def confirmation(request):
 
 def contact(request):
     if request.user.is_authenticated:
+        Customer.objects.get_or_create(user=request.user)
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.cart_set.all()
@@ -195,5 +205,5 @@ def register(request):
         form = CustomReg(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('login')
     return render(request,'registration/register.html', {'form':form})
