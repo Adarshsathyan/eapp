@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Card List</h2>
+                        <h2>Cart List</h2>
                     </div>
                 </div>
             </div>
@@ -68,21 +68,16 @@
 
               <tr class="bottom_button">
                 <td>
-                  <a class="btn_1" href="{% url 'index' %}">Back to Shop</a>
+                  <a class="btn_1" href="{% url 'index' %}">Back</a>
                 </td>
-                <td></td>
-                <td></td>
-                <td>Quantity: {{order.get_cart_items}}</td>
+                <tr>
+              <td>Quantity: {{order.get_cart_items}}</td>
+            </tr>
+
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
               <td>Sub total:  ₹{{order.get_cart_total}}/-</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
               <td><a class="btn_1 checkout_btn_1" href="{% url 'checkout' %}">Checkout</a></td>
             </tr>
               </tr>
